@@ -1,0 +1,13 @@
+type Hotel {
+  id: ID!
+  name: String!
+  description: String!
+  latitude: Float!
+  longitude: Float!
+  thumbnailUrl: String!
+  owner: User!
+}
+
+type Query {
+  findHotels: [Hotel!]!
+}

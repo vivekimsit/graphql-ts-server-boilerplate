@@ -1,0 +1,16 @@
+type Room {
+  id: ID!
+  name: String!
+  category: String!
+  description: String!
+  price: Int!
+  beds: Int!
+  guests: Int!
+  amenities: [String!]!
+  pictureUrl: String!
+  hotel: Hotel!
+}
+
+type Query {
+  findRooms: [Room!]!
+}

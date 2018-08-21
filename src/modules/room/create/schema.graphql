@@ -1,0 +1,14 @@
+input CreateRoomInput {
+  name: String!
+  picture: Upload
+  category: String!
+  description: String!
+  price: Int!
+  beds: Int!
+  guests: Int!
+  amenities: [String!]!
+}
+
+type Mutation {
+  createRoom(input: CreateRoomInput!): Boolean!
+}

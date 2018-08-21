@@ -1,20 +1,22 @@
-import * as bcrypt from "bcryptjs";
 import {
   Entity,
   Column,
   BaseEntity,
   PrimaryGeneratedColumn,
-  BeforeInsert
+  OneToMany
 } from "typeorm";
+import { Hotel } from "./Hotel";
 
 @Entity("users")
 export class User extends BaseEntity {
-  @PrimaryGeneratedColumn("uuid") id: string;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
   @Column("varchar", { length: 255 })
   email: string;
 
-  @Column("text") password: string;
+  @Column("text")
+  password: string;
 
   @Column("boolean", { default: false })
   confirmed: boolean;
@@ -22,8 +24,6 @@ export class User extends BaseEntity {
   @Column("boolean", { default: false })
   forgotPasswordLocked: boolean;
 
-  @BeforeInsert()
-  async hashPasswordBeforeInsert() {
-    this.password = await bcrypt.hash(this.password, 10);
-  }
+  @OneToMany(() => Hotel, hotel => hotel.user)
+  hotels: Hotel[];
 }
