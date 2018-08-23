@@ -4,7 +4,7 @@
     "type": "postgres",
     "host": "localhost",
     "port": 5432,
-    "username": "postgres",
+    "username": "test",
     "password": "",
     "database": "yogurt",
     "synchronize": true,

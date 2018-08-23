@@ -1,11 +1,23 @@
+type Address {
+  lat: Float!
+  lng: Float!
+  line1: String
+  line2: String
+  city: String
+  state: String
+  country: String
+  type: String
+  zip: String
+  formattedAddress: String
+}
+
 type Hotel {
   id: ID!
   name: String!
   description: String!
-  latitude: Float!
-  longitude: Float!
   thumbnailUrl: String!
-  owner: User!
+  owner: User!,
+  address: Address!
 }
 
 type Query {

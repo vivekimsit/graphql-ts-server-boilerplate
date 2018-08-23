@@ -1,11 +1,14 @@
+import * as bcrypt from "bcryptjs";
 import {
   Entity,
   Column,
   BaseEntity,
   PrimaryGeneratedColumn,
-  OneToMany
+  OneToMany,
+  BeforeInsert
 } from "typeorm";
 import { Hotel } from "./Hotel";
+import { Address } from "./Address";
 
 @Entity("users")
 export class User extends BaseEntity {
@@ -26,4 +29,12 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Hotel, hotel => hotel.user)
   hotels: Hotel[];
+
+  @OneToMany(() => Address, address => address.user)
+  addresses: Address;
+
+  @BeforeInsert()
+  async hashPasswordBeforeInsert() {
+    this.password = await bcrypt.hash(this.password, 10);
+  }
 }

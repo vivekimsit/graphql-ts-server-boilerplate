@@ -3,6 +3,7 @@ import { createWriteStream } from "fs";
 
 import { ResolverMap } from "../../../types/graphql-utils";
 import { Hotel } from "../../../entity/Hotel";
+import { Address } from "../../../entity/Address";
 
 const storeUpload = async (stream: any, mimetype: string): Promise<any> => {
   const extension = mimetype.split("/")[1];
@@ -28,12 +29,19 @@ export const resolvers: ResolverMap = {
     createHotel: async (_, { input: { picture, ...data } }, { session }) => {
       const thumbnailUrl = picture ? await processUpload(picture) : null;
 
-      await Hotel.create({
+      const address = Address.create({ ...data.address });
+      await address.save();
+
+      const hotel = Hotel.create({
         ...data,
         thumbnailUrl,
-        userId: session.userId
-      }).save();
+        userId: "e058f212-2d3f-42d4-938b-1c2568058491"
+      });
 
+      hotel.address = address;
+      await hotel.save();
+
+      console.log(session);
       return true;
     }
   }

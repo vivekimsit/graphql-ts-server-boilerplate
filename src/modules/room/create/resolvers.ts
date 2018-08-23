@@ -30,10 +30,9 @@ export const resolvers: ResolverMap = {
 
       await Room.create({
         ...data,
-        pictureUrl,
-        hotelId: session.user.hotelId
+        pictureUrl
       }).save();
-
+      console.log(session);
       return true;
     }
   }

@@ -1,0 +1,21 @@
+type Booking {
+  id: ID!
+  email: String!
+  firstName: String!
+  lastName: String
+  phoneNumber: String
+  age: Int
+  checkIn: String
+  checkOut: String
+  amount: Int!
+  totalRooms: Int!
+  totalGuests: Int!
+  bookingSource: String!
+  bookingType: String!
+  paymentMode: String!
+  status: String
+}
+
+type Query {
+  viewBooking(id: String!): Booking
+}

@@ -4,10 +4,13 @@ import {
   BaseEntity,
   PrimaryGeneratedColumn,
   ManyToOne,
-  OneToMany
+  OneToMany,
+  OneToOne,
+  JoinColumn
 } from "typeorm";
 import { User } from "./User";
 import { Room } from "./Room";
+import { Address } from "./Address";
 
 @Entity("hotel")
 export class Hotel extends BaseEntity {
@@ -20,7 +23,7 @@ export class Hotel extends BaseEntity {
   @Column("varchar", { length: 100, nullable: true })
   slug: string;
 
-  @Column("text")
+  @Column("text", { nullable: true })
   thumbnailUrl: string;
 
   @Column("text", { nullable: true })
@@ -28,12 +31,6 @@ export class Hotel extends BaseEntity {
 
   @Column("varchar", { length: 255 })
   description: string;
-
-  @Column("double precision")
-  latitude: number;
-
-  @Column("double precision")
-  longitude: number;
 
   @Column("uuid")
   userId: string;
@@ -43,4 +40,21 @@ export class Hotel extends BaseEntity {
 
   @OneToMany(() => Room, room => room.hotel)
   rooms: Room[];
+
+  @OneToOne(() => Address)
+  @JoinColumn()
+  address: Address;
+
+  @Column("timestamp", {
+    precision: 3,
+    default: () => "CURRENT_TIMESTAMP(3)"
+  })
+  createdOn: Date;
+
+  @Column("timestamp", {
+    precision: 3,
+    default: () => "CURRENT_TIMESTAMP(3)",
+    onUpdate: "CURRENT_TIMESTAMP(3)"
+  })
+  updatedOn: Date;
 }
