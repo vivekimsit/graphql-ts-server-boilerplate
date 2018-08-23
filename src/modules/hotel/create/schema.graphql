@@ -1,14 +1,13 @@
 scalar Upload
 
-input CreateListingInput {
+input CreateHotelInput {
   name: String!
-  slug: String!
-  picture: Upload
   description: String!
+  picture: Upload
   latitude: Float!
   longitude: Float!
 }
 
 type Mutation {
-  createListing(input: CreateListingInput!): Boolean!
+  createHotel(input: CreateHotelInput!): Boolean!
 }

@@ -25,7 +25,7 @@ const processUpload = async (upload: any) => {
 
 export const resolvers: ResolverMap = {
   Mutation: {
-    createListing: async (_, { input: { picture, ...data } }, { session }) => {
+    createHotel: async (_, { input: { picture, ...data } }, { session }) => {
       const thumbnailUrl = picture ? await processUpload(picture) : null;
 
       await Hotel.create({

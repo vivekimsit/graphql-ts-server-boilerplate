@@ -17,20 +17,17 @@ export class Hotel extends BaseEntity {
   @Column("varchar", { length: 100 })
   name: string;
 
-  @Column("varchar", { length: 100 })
+  @Column("varchar", { length: 100, nullable: true })
   slug: string;
 
   @Column("text")
   thumbnailUrl: string;
 
-  @Column("text")
+  @Column("text", { nullable: true })
   coverUrl: string;
 
   @Column("varchar", { length: 255 })
   description: string;
-
-  @Column("int")
-  price: number;
 
   @Column("double precision")
   latitude: number;
