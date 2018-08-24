@@ -25,13 +25,21 @@ const processUpload = async (upload: any) => {
 
 export const resolvers: ResolverMap = {
   Mutation: {
-    createRoom: async (_, { input: { picture, ...data } }, { session }) => {
+    createRoom: async (
+      _,
+      { input: { picture, amenities, ...data } },
+      { session }
+    ) => {
       const pictureUrl = picture ? await processUpload(picture) : null;
 
-      await Room.create({
+      const room = Room.create({
         ...data,
         pictureUrl
-      }).save();
+      });
+
+      room.amenities = amenities;
+      await room.save();
+
       console.log(session);
       return true;
     }

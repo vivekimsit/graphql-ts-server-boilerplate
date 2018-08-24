@@ -3,9 +3,12 @@ import {
   Column,
   BaseEntity,
   PrimaryGeneratedColumn,
-  ManyToOne
+  ManyToOne,
+  ManyToMany,
+  JoinTable
 } from "typeorm";
 import { Hotel } from "./Hotel";
+import { Amenity } from "./Amenity";
 
 @Entity("room")
 export class Room extends BaseEntity {
@@ -42,14 +45,15 @@ export class Room extends BaseEntity {
   @Column("int")
   guests: number;
 
-  @Column("text", { array: true })
-  amenities: string[];
-
   @Column("uuid")
   hotelId: string;
 
   @ManyToOne(() => Hotel, hotel => hotel.rooms)
   hotel: Hotel;
+
+  @ManyToMany(() => Amenity)
+  @JoinTable()
+  amenities: Amenity[];
 
   @Column("timestamp", {
     precision: 3,

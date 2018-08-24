@@ -20,10 +20,10 @@ export class Booking extends BaseEntity {
   @Column("int")
   age: number;
 
-  @Column("datetime")
+  @Column("date")
   checkIn: Date;
 
-  @Column("datetime")
+  @Column("date")
   checkOut: Date;
 
   @Column("double precision")

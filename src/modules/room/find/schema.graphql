@@ -1,3 +1,9 @@
+type Amenity {
+  name: String!
+  value: String!
+  type: String!
+}
+
 type Room {
   id: ID!
   name: String!
@@ -9,6 +15,7 @@ type Room {
   amenities: [String!]!
   pictureUrl: String!
   hotel: Hotel!
+  amenities: [Amenity!]!
 }
 
 type Query {

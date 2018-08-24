@@ -1,3 +1,7 @@
+input CreateAmenityInput {
+  id: ID!
+}
+
 input CreateRoomInput {
   hotelId: ID!
   name: String!
@@ -7,7 +11,7 @@ input CreateRoomInput {
   price: Int!
   beds: Int!
   guests: Int!
-  amenities: [String!]!
+  amenities: [CreateAmenityInput!]!
 }
 
 type Mutation {
